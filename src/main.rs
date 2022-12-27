@@ -16,10 +16,13 @@ fn main() {
             .read_line(&mut guess)
             .expect("Error: unable to read your guess.");
 
-        let mut guess: u32 = guess
-            .trim()
-            .parse()
-            .expect("Please type a number between 1 and 100.");
+        let mut guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Invalid number. Please try again.");
+                continue;
+            }
+        };
 
         println!("You guessed the number: {guess}");
 
