@@ -10,7 +10,11 @@ fn main() {
     loop {
         println!("Please enter your guess:");
 
+        // Create a mutable variable to store the user's guess.
         let mut guess = String::new();
+
+        // Create a mutable variable to store the number of guesses.
+        let mut guessCount = 0;
 
         io::stdin()
             .read_line(&mut guess)
@@ -24,11 +28,13 @@ fn main() {
             }
         };
 
-        println!("You guessed the number: {guess}");
+        guessCount += 1;
+
+        println!("Guess #{guessCount}: you guessed the number {guess}.");
 
         match guess.cmp(&winning_number) {
-            Ordering::Less => println!("Too small!"),
-            Ordering::Greater => println!("Too big!"),
+            Ordering::Less => println!("Your guess was too low."),
+            Ordering::Greater => println!("Your guess was too high."),
             Ordering::Equal => {
                 println!("Congratulations! You guessed the winning number!");
                 break;
