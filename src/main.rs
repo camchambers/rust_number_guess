@@ -7,14 +7,22 @@ fn main() {
 
     let winning_number = rand::thread_rng().gen_range(1..=100);
 
+    // Create a mutable variable to store the number of guesses.
+    let mut guessCount = 0;
+
+    // Create a mutable variable to store the maximum number of guesses.
+    let mut maxGuesses: i32 = 10;
+
     loop {
+        if guessCount == maxGuesses {
+            println!("You have run out of guesses. The winning number was {winning_number}.");
+            break;
+        }
+
         println!("Please enter your guess:");
 
         // Create a mutable variable to store the user's guess.
         let mut guess = String::new();
-
-        // Create a mutable variable to store the number of guesses.
-        let mut guessCount = 0;
 
         io::stdin()
             .read_line(&mut guess)
@@ -30,7 +38,7 @@ fn main() {
 
         guessCount += 1;
 
-        println!("Guess #{guessCount}: you guessed the number {guess}.");
+        println!("Guess {guessCount} of {maxGuesses}. You guessed the number {guess}.");
 
         match guess.cmp(&winning_number) {
             Ordering::Less => println!("Your guess was too low."),
