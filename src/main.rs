@@ -8,13 +8,13 @@ fn main() {
     let winning_number = rand::thread_rng().gen_range(1..=100);
 
     // Create a mutable variable to store the number of guesses.
-    let mut guessCount = 0;
+    let mut guess_count = 0;
 
     // Create a mutable variable to store the maximum number of guesses.
-    let mut maxGuesses: i32 = 10;
+    let max_guesses: i32 = 10;
 
     loop {
-        if guessCount == maxGuesses {
+        if guess_count == max_guesses {
             println!("You have run out of guesses. The winning number was {winning_number}.");
             break;
         }
@@ -28,7 +28,7 @@ fn main() {
             .read_line(&mut guess)
             .expect("Error: unable to read your guess.");
 
-        let mut guess: u32 = match guess.trim().parse() {
+        let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => {
                 println!("Invalid number. Please try again.");
@@ -36,9 +36,9 @@ fn main() {
             }
         };
 
-        guessCount += 1;
+        guess_count += 1;
 
-        println!("Guess {guessCount} of {maxGuesses}. You guessed the number {guess}.");
+        println!("Guess {guess_count} of {max_guesses}. You guessed the number {guess}.");
 
         match guess.cmp(&winning_number) {
             Ordering::Less => println!("Your guess was too low."),
